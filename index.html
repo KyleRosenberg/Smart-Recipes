@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/meetselva/attrchange/master/js/attrchange.js"></script>
+    <link rel='stylesheet' type='text/css' href='index.css'/>
+    <link rel='stylesheet' type='text/css' href='semantic/dist/semantic.min.css'/>
+    <script src='semantic/dist/semantic.min.js'></script>
+    <script src='index.js'></script>
+</head>
+<body>
+    <div id='title' class='ui transition hidden'>
+        <div class='ui grid container'>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class="two wide column"></div>
+            <div class="twelve wide column" style='font-size:34px'>
+                <div class='ui huge green centered header'>Smart Recipes</div>
+            </div>
+            <div class="two wide column"></div>
+        </div>
+        <div class='ui center aligned grid'>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='ten wide column'>
+                <div class='ui right floated green massive right labeled icon button' id='gotorecipes'>
+                    <i class='right arrow icon'></i>
+                    Start Cooking
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='main' class='ui transition hidden'>
+        <div class='ui grid' style='width:100%;height:90%; padding-top:5%'>
+            <div class='one wide column'></div>
+            <div id='infocolumn' class='ui ten wide column' style='font-size:200%;visibility:hidden;overflow-y:auto;'>
+                <div id='recipename' class='ui huge header'>Recipe name</div>
+                <ul style='font-size:75%' class='ui list' id='ingredients'>
+                </ul>
+                <p id='directions'>
+                </p>
+            </div>
+            <div class='one wide column'></div>
+            <div class='ui two wide column'>
+                <div class='ui vertical inverted massive menu' style='height:100%'>
+                    <div class='ui huge centered inverted header' style='height:10%'>
+                        <p style='padding-top:5%'>
+                            <a id='firsttime' class="ui hidden pointing below label">Select a meal</a>
+                            Suggestions
+                        </p>
+                    </div>
+                    <a id='recipeselect0' class="item" style='height:16%'>
+                        <p id='recipename0'>Recipe name</p>
+                        <div class='ui' style='padding-left:25%;padding-right:25%'>
+                            <div class='ui segment' style=''>
+                                <div id='rating0' class="ui large star rating" data-max-rating="6" data-rating="0"></div>
+                            </div>
+                        </div>
+                    </a>
+                    <a id='recipeselect1' class="item" style='height:16%'>
+                        <p id='recipename1'>Recipe name</p>
+                        <div class='ui' style='padding-left:25%;padding-right:25%'>
+                            <div class='ui segment' style=''>
+                                <div id='rating1' class="ui large star rating" data-max-rating="6" data-rating="0"></div>
+                            </div>
+                        </div>
+                    </a>
+                    <a id='recipeselect2' class="item" style='height:16%'>
+                        <p id='recipename2'>Recipe name</p>
+                        <div class='ui' style='padding-left:25%;padding-right:25%'>
+                            <div class='ui segment' style=''>
+                                <div id='rating2' class="ui large star rating" data-max-rating="6" data-rating="0"></div>
+                            </div>
+                        </div>
+                    </a>
+                    <a id='recipeselect3' class="item" style='height:16%'>
+                        <p id='recipename3'>Recipe name</p>
+                        <div class='ui' style='padding-left:25%;padding-right:25%'>
+                            <div class='ui segment' style=''>
+                                <div id='rating3' class="ui large star rating" data-max-rating="6" data-rating="0"></div>
+                            </div>
+                        </div>
+                    </a>
+                    <a id='recipeselect4' class="item" style='height:16%'>
+                        <p id='recipename4'>Recipe name</p>
+                        <div class='ui' style='padding-left:25%;padding-right:25%'>
+                            <div class='ui segment' style=''>
+                                <div id='rating4' class="ui large star rating" data-max-rating="6" data-rating="0"></div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class='item'>
+                        <div id='getnew' class='ui fluid positive button'>
+                            Get new suggestions
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
