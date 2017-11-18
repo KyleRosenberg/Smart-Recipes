@@ -3,6 +3,61 @@ var jsonfile = require('jsonfile');
 var recipes = {};
 var population = [];
 var ratings = [];
+var categories = [
+    "Asian Fusion",
+    "Chicken",
+    "Chinese",
+    "Seafood",
+    "Cheese",
+    "Mexican",
+    "Turkey",
+    "Pizza",
+    "Fruit",
+    "Vegan",
+    "Vegetarian",
+    "Holiday & Seasonal",
+    "Casseroles",
+    "American",
+    "Beef",
+    "Pasta",
+    "Beverages",
+    "Desserts",
+    "Breads",
+    "Breakfast",
+    "Healthy Choices",
+    "Salads",
+    "Side Dishes",
+    "Sandwiches",
+    "Snacks",
+    "Buffalo",
+    "Vegetables",
+    "Appetizers",
+    "Italian",
+    "Soups & Stews",
+    "Grill",
+    "Pork",
+    "Barbeque",
+    "Fish",
+    "Bacon",
+    "Candy",
+    "Nuts",
+    "European",
+    "French",
+    "Brunch",
+    "Slow Cooker",
+    "Indian",
+    "Thai",
+    "Cajun",
+    "Lamb",
+    "German",
+    "Japanese",
+    "Condiments & Sauces",
+    "Duck",
+    "Vietnamese",
+    "Greek",
+    "Russian",
+    "Pet Food & Treats"
+]
 
 function getRecipesWithCategory(dict, cat){
     keys = Object.keys(dict);
@@ -28,6 +83,20 @@ function displayRecipe(index){
         ingredients.appendChild(li);
     }
     $('#directions').text(recipe.directions);
+}
+
+function getCategories(){
+    keys = Object.keys(recipes);
+    unique = [];
+    for (let i = 0; i<keys.length; i++){
+        cats = recipes[keys[i]]['categories'];
+        for (let j = 0; j < cats.length; j++){
+            if (unique.indexOf(cats[j])==-1){
+                unique.push(cats[j]);
+            }
+        }
+    }
+    console.log(unique);
 }
 
 window.onload = function(){
@@ -148,8 +217,39 @@ function getNewPopulation(){
         temp.push(recipes[keys[index]]);
     }
     for (var i = 0; i<5; i++){
-        population[i] = getSimilarRecipe(recipes[population[i]]);
+        population[i] = getSimlarRecipeLinearAlgebra(recipes[population[i]]);
     }
+}
+
+function getSimlarRecipeLinearAlgebra(recipe){
+    let index = getKeyByValue(recipes, recipe);
+    query = getQueryArray(recipe);
+    keys = Object.keys(recipes);
+    candidates = [];
+    for (let i = 0; i<keys.length; i++){
+        if (keys[i] == index)
+            continue;
+        q = getQueryArray(recipes[keys[i]]);
+        let numer = 0, denom1 = 0, denom2 = 0;
+        for (let j = 0; j<q.length; j++){
+            numer += q[j]*query[j];
+            denom1 += query[j]*query[j];
+            denom2 += q[j]*q[j];
+        }
+        let similarity = numer/(Math.sqrt(denom1)*Math.sqrt(denom2));
+        if (similarity > .75)
+            candidates.push(recipes[keys[i]]);
+    }
+    return getKeyByValue(recipes, candidates[Math.floor(Math.random()*candidates.length)]);
+}
+
+function getQueryArray(recipe){
+    ret = Array.from(Array(categories.length), ()=>0);
+    for (let i = 0; i<recipe.categories.length; i++){
+        let index = getKeyByValue(categories, recipe.categories[i]);
+        ret[index] = 1;
+    }
+    return ret;
 }
 
 function getSimilarRecipe(recipe){
